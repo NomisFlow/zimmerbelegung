@@ -96,6 +96,7 @@ public class Zimmerbelegung {
     }
     
     public static LinkedList<Schueler> testCase(){
+        /*Funktionierender Fall*/
         Schueler s1 = new Schueler("Alina");
         Schueler s2 = new Schueler("Emma");
         Schueler s3 = new Schueler("Lara");
@@ -126,6 +127,7 @@ public class Zimmerbelegung {
     }
     
     public static LinkedList<Schueler> testCase2(){
+        /*Nicht funktionierender Fall*/
         Schueler s1 = new Schueler("Alina");
         Schueler s2 = new Schueler("Emma");
         Schueler s3 = new Schueler("Lara");
