@@ -1,21 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zimmerbelegung;
 
 import java.util.LinkedList;
 
 /**
- *
  * @author simonwolf
+ * @author simonbothe
  */
+
 public class Schueler {
     LinkedList<Schueler> favorites;
     LinkedList<Schueler> dislikes;
     String name;
-    Zimmer zimmer;
     
     public Schueler(String name){
         this.name = name;
@@ -26,6 +21,7 @@ public class Schueler {
     void addFavorite(Schueler p){
         favorites.add(p);
     }
+    
     void addDisliked(Schueler p){
         dislikes.add(p);
     }
@@ -41,11 +37,5 @@ public class Schueler {
     public String getName(){
         return name;
     }
-    void setZimmer(Zimmer z){
-        zimmer = z;
-    }
-    Zimmer getZimmer(){
-        return zimmer;
-    }
-    
+   
 }
