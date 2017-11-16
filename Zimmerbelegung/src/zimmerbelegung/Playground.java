@@ -26,11 +26,14 @@ public class Playground {
         einlesen(s);
     }
     
-    private void einlesen(String filename){
+    
+    private void einlesen(String filename){ 
+        Path file =  Paths.get("Files/" + filename +".txt");
         Schueler schueler;
         LinkedList<Schueler> s = new LinkedList<Schueler>();
-        Path file =  Paths.get("Files/" + filename +".txt");
-        List<String> schuelerNamen = getLines(file, 0);
+        
+        //Jede vierte Zeile der Datei wird ausgelesen. Startpunkt variiert, je nachdem welche Information benötigt wird.
+        List<String> schuelerNamen = getLines(file, 0); 
         List<String> positivListen = getLines(file, 1);
         List<String> negativListen = getLines(file,2);
         //Initialisiere alle Schüler 
@@ -42,10 +45,12 @@ public class Playground {
         int i = 0;  //Zählvariable um durch Liste aller Schüler zu iterieren.
         //Füge Positiv-/Negativliste zu jedem Schüler hinzu
         for(String e: positivListen){
-            String[] strArr = e.split(" ");
-            ArrayList<String> parts = new ArrayList<String>(Arrays.asList(strArr));
-            parts.remove(0);
-            for(String str: parts){
+            String[] strArr = e.split(" "); //Array nötig um split-Methode zu benutzen
+            ArrayList<String> parts = new ArrayList<String>(Arrays.asList(strArr)); //jedoch restliche Handhabung mit einer Liste einfacher
+            parts.remove(0); //Pluszeichen wird entfernt
+            
+            //jeder Eintrag in 'parts' wird mit dem Namen jeden vorhandenen Schülers verglichen
+            for(String str: parts){ 
                 for(Schueler sch: s){
                     if(sch.getName().equals(str)){
                         s.get(i).addFavorite(sch);
@@ -55,6 +60,7 @@ public class Playground {
             i++;  
         }
         i = 0;
+        
         for(String e: negativListen){
             String[] strArr = e.split(" ");
             ArrayList<String> parts = new ArrayList<String>(Arrays.asList(strArr));
@@ -67,12 +73,7 @@ public class Playground {
                 }
             }
             i++;    
-        }
-
-        
-        
-        
-        
+        } 
     } 
     
     private List<String> getLines(Path file, int l){

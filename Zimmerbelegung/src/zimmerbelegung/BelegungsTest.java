@@ -9,12 +9,7 @@ import java.util.LinkedList;
 
 public class BelegungsTest {
     
-    public static void main(String[] args){
-        //moeglicherTestFall();
-        //unmoeglicherTestFall();
-        Playground p = new Playground("zimmerbelegung1");
-        
-    }
+
 
     public static void moeglicherTestFall(){
         /*Funktionierender Fall*/
@@ -43,7 +38,7 @@ public class BelegungsTest {
         s.add(s5);
         s.add(s6);
         
-        System.out.println(new Zimmerbelegung(s).sortiere());
+        
     }
     
     public static void unmoeglicherTestFall(){
@@ -74,6 +69,6 @@ public class BelegungsTest {
         s.add(s5);
         s.add(s6);
         
-        System.out.println(new Zimmerbelegung(s).sortiere());
+        
     }
 }
