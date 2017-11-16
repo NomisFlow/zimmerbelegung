@@ -10,8 +10,10 @@ import java.util.LinkedList;
 public class BelegungsTest {
     
     public static void main(String[] args){
-        moeglicherTestFall();
-        unmoeglicherTestFall();
+        //moeglicherTestFall();
+        //unmoeglicherTestFall();
+        Playground p = new Playground("zimmerbelegung1");
+        
     }
 
     public static void moeglicherTestFall(){

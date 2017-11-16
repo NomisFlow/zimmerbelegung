@@ -8,7 +8,8 @@ import java.util.LinkedList;
  */
 
 class Zimmer {
-    LinkedList <Schueler> belegung;
+    private LinkedList <Schueler> belegung;
+    
     public Zimmer(){
         belegung = new LinkedList<Schueler>();
     }
@@ -25,6 +26,7 @@ class Zimmer {
         return belegung;
     }
     
+    //Gibt eine String-Liste mit den Namen der zugeordneten Schuelerinnen zurueck
     public LinkedList getBelegungName(){
         LinkedList<String> belegung = new LinkedList<String>();
         for(Schueler s: this.belegung){
@@ -33,6 +35,7 @@ class Zimmer {
         return belegung;
     }
     
+    //Ueberprueft ob sich der uebergebende Schueler in diesem Zimmer befindet 
     public boolean istInZimmer(Schueler s){
         for(Schueler schueler: belegung){
             if(s == schueler)
