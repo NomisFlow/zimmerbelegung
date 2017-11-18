@@ -1,0 +1,10 @@
+Folgende Zimmerkonstellation ist möglich:
+[Anna, Julia, Jessika, Pauline, Miriam]
+[Hannah, Celine, Vanessa, Lara, Nele, Michelle, Charlotte, Celina, Carolin, Clara, Nina, Lisa, Annika, Kim, Pia, Luisa]
+[Lea, Laura, Sarah, Marie, Alina, Johanna, Melina, Katharina, Lena, Larissa, Jana, Sophie, Sofia, Josephine]
+[Leonie, Lilli]
+[Emma]
+[Antonia]
+[Emily]
+[Jasmin]
+[Lina, Merle]

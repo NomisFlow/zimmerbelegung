@@ -1,8 +1,12 @@
 package zimmerbelegung;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.LinkedList;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,6 +14,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author simonwolf
@@ -19,23 +25,22 @@ import java.util.List;
 public class Zimmerbelegung {
     private LinkedList<Schueler> alleSchueler;
     private LinkedList<Zimmer> alleZimmer; 
+
     
     public static void main(String[] args){
-        Zimmerbelegung z = new Zimmerbelegung("zimmerbelegung1");
+        Zimmerbelegung z = new Zimmerbelegung("zimmerbelegung4");
         
     }
-        
-    
     public Zimmerbelegung(String filename){
         alleSchueler = new LinkedList<Schueler>();
         alleZimmer = new LinkedList<Zimmer>();
         einlesen(filename);
         sortiere();
-        getBelegung();
+        
     }
       
     //sortiert zuerst alle Schueler nach likes und fuehrt danach die getBelegung() Methode aus
-    public String sortiere(){
+    public boolean sortiere(){
         for(Schueler s: alleSchueler){
             hinzufuegen(s,null);
         }
@@ -71,24 +76,23 @@ public class Zimmerbelegung {
     }
 
     //Ueberprueft, ob die Zimmerkonstellation auch nach Dislikes moeglich ist und gibt danach das Ergebniss als String zurueck
-    private String getBelegung(){
+    private boolean getBelegung(){
         for(Zimmer z: alleZimmer){
             LinkedList<Schueler> belegungZimmer = z.getBelegung();
             for(Schueler s: belegungZimmer){
-                for(Schueler s1: s.getDislikes()){
-                    if(z.istInZimmer(s1)){
-                        return "Keine Einteilung möglich";
+                for(Schueler sch: s.getDislikes()){
+                    if(z.istInZimmer(sch)){
+                        System.out.println("Keine Zimmereinteilung möglich.");
+                        return false;
                     }
                 }
             }
         }
-        String belegung = "";
+        LinkedList<String> belegung = new LinkedList<String>();
         for(Zimmer z: alleZimmer){
-            belegung = belegung + z.getBelegungName();
+            belegung.add(z.getBelegungName().toString());
         }
-        belegungInDatei(belegung);
-        System.out.println(belegung);
-        return belegung;
+        return belegungInDatei(belegung);
     }
     
 
@@ -156,7 +160,24 @@ public class Zimmerbelegung {
         return null;
     }
     
-    private void belegungInDatei(String belegung){
+    private boolean belegungInDatei(LinkedList<String> belegung){
+        PrintWriter pw = null;
+        try {
+            pw = new PrintWriter(new BufferedWriter(new FileWriter("Files/ergebnis.txt")));
+            pw.println("Folgende Zimmerkonstellation ist möglich:");
+            for(String s: belegung){
+                pw.println(s);
+            }
+            return true;
+        } catch (IOException ex) {
+            Logger.getLogger(Zimmerbelegung.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            if(pw != null){
+                pw.flush();
+                pw.close();
+            }
+        }
+        return false;
         
     }
 }
