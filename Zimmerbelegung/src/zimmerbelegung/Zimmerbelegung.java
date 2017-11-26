@@ -3,6 +3,7 @@ package zimmerbelegung;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.LinkedList;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,13 +27,12 @@ import java.util.logging.Logger;
 public class Zimmerbelegung {
     private LinkedList<Schueler> alleSchueler;
     private LinkedList<Zimmer> alleZimmer; 
+    private GUI g;
 
     
-    public static void main(String[] args){
-        Zimmerbelegung z = new Zimmerbelegung("zimmerbelegung4");
-        
-    }
-    public Zimmerbelegung(String filename){
+
+    public Zimmerbelegung(String filename, GUI g){
+        this.g = g;
         alleSchueler = new LinkedList<Schueler>();
         alleZimmer = new LinkedList<Zimmer>();
         einlesen(filename);
@@ -82,7 +83,7 @@ public class Zimmerbelegung {
             for(Schueler s: belegungZimmer){
                 for(Schueler sch: s.getDislikes()){
                     if(z.istInZimmer(sch)){
-                        System.out.println("Keine Zimmereinteilung möglich.");
+                        g.setAusgabe("Keine Zimmereinteilung möglich.");
                         return false;
                     }
                 }
@@ -92,12 +93,26 @@ public class Zimmerbelegung {
         for(Zimmer z: alleZimmer){
             belegung.add(z.getBelegungName().toString());
         }
+        g.setAusgabe("Zimmerbelegung in 'ergebnis' geschrieben.");
         return belegungInDatei(belegung);
     }
     
 
     private void einlesen(String filename){ 
         Path file =  Paths.get("Files/" + filename +".txt");
+        File fl = new File(file.toString());
+        if(!fl.exists()){
+            g.setAusgabe("Datei nicht vorhanden.");
+            System.out.println("Datei nicht vorhanden.");
+            try {
+                g.setAusgabe("Datei nicht vorhanden.");
+                TimeUnit.MILLISECONDS.sleep(2000);
+                return;
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Zimmerbelegung.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
         Schueler schueler;
         LinkedList<Schueler> s = new LinkedList<Schueler>();
         
